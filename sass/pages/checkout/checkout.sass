@@ -1,0 +1,74 @@
+$breakpoints: 640px, 768px, 1024px, 1280px, 1536px
+@each $brp in $breakpoints
+    .container
+        @media (min-width: $brp)
+            max-width: $brp
+/*
+    The code above will output:
+        @media (min-width: 640px) {
+            .container {
+                max-width: 640px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                max-width: 768px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                max-width: 1024px;
+            }
+        }
+
+        @media (min-width: 1280px) {
+            .container {
+                max-width: 1280px;
+            }
+        }
+
+        @media (min-width: 1536px) {
+            .container {
+                max-width: 1536px;
+            }
+        }
+*/
+
+.container
+    width: 100%
+.block
+    display: block
+.flex
+    display: flex
+.flex-row
+    flex-direction: row
+.flex-col
+    flex-direction: col
+.flex-1
+    flex: 1 1 0%
+.flex-2
+    flex: 2 2 0%
+.flex-3
+    flex: 3 3 0%
+.mx-auto
+    margin-left: auto
+    margin-right: auto
+.logo
+    display: block
+    margin-left: auto
+    margin-right: auto
+    margin-bottom: 2rem
+
+.bd-placeholder-img 
+    font-size: 1.125rem
+    text-anchor: middle
+    -webkit-user-select: none
+    -moz-user-select: none
+    user-select: none
+
+@media (min-width: 768px) 
+    .bd-placeholder-img-lg 
+        font-size: 3.5rem
+      

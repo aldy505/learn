@@ -1,0 +1,21 @@
+{
+  "name": "learn-sass",
+  "version": "1.0.0",
+  "description": "Learn sass the easy way",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "start": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aldy505/learn-sass.git"
+  },
+  "author": "Reinaldy Rafli <aldy505@tutanota.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/aldy505/learn-sass#readme",
+  "devDependencies": {
+    "sass": "^1.35.2",
+    "vite": "^2.4.1"
+  }
+}

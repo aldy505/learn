@@ -1,0 +1,26 @@
+datasource db {
+  provider = "postgresql"
+  url = "postgres://postgres:password@localhost:5432/learn_go"
+}
+
+generator db {
+  provider = "go run github.com/prisma/prisma-client-go"
+}
+
+model User {
+  id String @id @default(uuid())
+  name String
+  email String @unique
+  password String
+  articles Article[]
+}
+
+model Article {
+  id String @id @default(uuid())
+  authorId String
+  author User @relation(fields: [authorId], references: [id])
+  title String
+  slug String @unique
+  subheading String
+  content String @db.Text
+}
