@@ -28,6 +28,14 @@ fn main() {
 
     looop::fooor();
     looop::looooooooop();
+
+    let ahmad = user::assign_person(user::Person{
+        talkative: true,
+        age: 32,
+        dumb: true,
+        name: "Ahmad".to_string(),
+    });
+    println!("{}", &ahmad)
 }
 
 fn add(x: i32, y: i32) -> i32 {

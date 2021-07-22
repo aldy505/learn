@@ -1,8 +1,8 @@
 pub struct Person {
-  talkative: bool,
-  dumb: bool,
-  age: i32,
-  name: String,
+  pub talkative: bool,
+  pub dumb: bool,
+  pub age: i32,
+  pub name: String,
 }
 
 pub fn assign_person(p: Person) -> bool {
