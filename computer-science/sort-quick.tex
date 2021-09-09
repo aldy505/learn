@@ -1,0 +1,162 @@
+\documentclass{article}
+\usepackage{minted}
+\author{Reinaldy Rafli}
+\date{\today}
+\title{Quick Sort Algorithm}
+\begin{document}
+
+\maketitle
+
+The elements must have a strict weak order and the index of the array can be of any discrete type.
+
+Strict weak ordering is a binary relation on a set. Such relations define a strict ordering, but they contain
+several elements of the same type. An example might be the relation "costs less than", or "is cheaper than".
+For any two elements that are of different types, the relation holds. On the other hand, there are some elements
+that cannot be ordered that way, because they are of the same type. An example for such a relation may be the relation,
+costs less than: milk may cost less than bread, and bread may cost less than cake. Two items of different types may cost
+less than another, but they can otherwise have the same price.
+
+For languages where this is not possible, sort an array of integers.
+
+
+Quicksort, also known as partition-exchange sort, uses these steps.
+
+  Choose any element of the array to be the pivot.
+  Divide all other elements (except the pivot) into two partitions.
+  All elements less than the pivot must be in the first partition.
+  All elements greater than the pivot must be in the second partition.
+  Use recursion to sort both partitions.
+  Join the first sorted partition, the pivot, and the second sorted partition.
+
+The best pivot creates partitions of equal length (or lengths differing by   1).
+
+The worst pivot creates an empty partition (for example, if the pivot is the first or last element of a sorted array).
+
+The run-time of Quicksort ranges from O(n log n) with the best pivots, to O(n2) with the worst pivots, 
+where n is the number of elements in the array.
+
+Quicksort has a reputation as the fastest sort. Optimized variants of quicksort are common features of many languages
+and libraries. One often contrasts quicksort with merge sort, because both sorts have an average time of O(n log n).
+
+"On average, mergesort does fewer comparisons than quicksort, so it may be better when complicated comparison routines
+are used. Mergesort also takes advantage of pre-existing order, so it would be favored for using sort() to merge several
+sorted arrays. On the other hand, quicksort is often faster for small arrays, and on arrays of a few distinct values, 
+repeated many times." — http://perldoc.perl.org/sort.html
+
+Quicksort is at one end of the spectrum of divide-and-conquer algorithms, with merge sort at the opposite end.
+
+Quicksort is a conquer-then-divide algorithm, which does most of the work during the partitioning and the recursive calls. 
+The subsequent reassembly of the sorted partitions involves trivial effort.
+
+Merge sort is a divide-then-conquer algorithm. The partioning happens in a trivial way, by splitting the input array in half. 
+Most of the work happens during the recursive calls and the merge phase.
+
+With quicksort, every element in the first partition is less than or equal to every element in the second partition. Therefore, the merge phase of quicksort is so trivial that it needs no mention!
+
+\begin{minted}{}
+  function quicksort(array)
+    if length(array) > 1
+        pivot := select any element of array
+        left := first index of array
+        right := last index of array
+        while left ≤ right
+            while array[left] < pivot
+                left := left + 1
+            while array[right] > pivot
+                right := right - 1
+            if left ≤ right
+                swap array[left] with array[right]
+                left := left + 1
+                right := right - 1
+        quicksort(array from first index to right)
+        quicksort(array from left to last index)
+\end{minted}
+
+\begin{minted}{c}
+  #include <stdio.h>
+ 
+  void quicksort(int *A, int len);
+    
+  int main (void) {
+    int a[] = {4, 65, 2, -31, 0, 99, 2, 83, 782, 1};
+    int n = sizeof a / sizeof a[0];
+    
+    int i;
+    for (i = 0; i < n; i++) {
+      printf("%d ", a[i]);
+    }
+    printf("\n");
+    
+    quicksort(a, n);
+    
+    for (i = 0; i < n; i++) {
+      printf("%d ", a[i]);
+    }
+    printf("\n");
+    
+    return 0;
+  }
+    
+  void quicksort(int *A, int len) {
+    if (len < 2) return;
+    
+    int pivot = A[len / 2];
+    
+    int i, j;
+    for (i = 0, j = len - 1; ; i++, j--) {
+      while (A[i] < pivot) i++;
+      while (A[j] > pivot) j--;
+    
+      if (i >= j) break;
+    
+      int temp = A[i];
+      A[i]     = A[j];
+      A[j]     = temp;
+    }
+    
+    quicksort(A, i);
+    quicksort(A + i, len - i);
+  }
+\end{minted}
+
+\begin{minted}{js}
+  function sort(array, less) {
+  
+  function swap(i, j) {
+    var t = array[i];
+    array[i] = array[j];
+    array[j] = t;
+  }
+
+  function quicksort(left, right) {
+
+    if (left < right) {
+      var pivot = array[left + Math.floor((right - left) / 2)],
+          left_new = left,
+          right_new = right;
+
+      do {
+        while (less(array[left_new], pivot)) {
+          left_new += 1;
+        }
+        while (less(pivot, array[right_new])) {
+          right_new -= 1;
+        }
+        if (left_new <= right_new) {
+          swap(left_new, right_new);
+          left_new += 1;
+          right_new -= 1;
+        }
+      } while (left_new <= right_new);
+
+      quicksort(left, right_new);
+      quicksort(left_new, right);
+
+    }
+  }
+
+  quicksort(0, array.length - 1);
+
+  return array;
+  }
+\end{minted}

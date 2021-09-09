@@ -1,0 +1,36 @@
+\documentclass{article}
+\usepackage{minted}
+\author{Reinaldy Rafli}
+\date{\today}
+\title{Bubble Sort Algorithm}
+\begin{document}
+
+\maketitle
+
+The singleton pattern is one of the simplest design patterns. Sometimes we need to have only one instance of our class 
+for example a single DB connection shared by multiple objects as creating a separate DB connection for every object 
+may be costly. Similarly, there can be a single configuration manager or error manager in an application that handles all 
+problems instead of creating multiple managers.
+
+Singleton is a part of Gang of Four design pattern and it is categorized under creational design patterns. 
+In this article, we are going to take a deeper look into the usage of the Singleton pattern. 
+It is one of the most simple design patterns in terms of the modelling but on the other hand, this is one of the most 
+controversial patterns in terms of complexity of usage.
+
+Singleton pattern is a design pattern which restricts a class to instantiate its multiple objects. It is nothing but 
+a way of defining a class. Class is defined in such a way that only one instance of the class is created in the complete 
+execution of a program or project. It is used where only a single instance of a class is required to control the action 
+throughout the execution. A singleton class shouldn’t have multiple instances in any case and at any cost. 
+Singleton classes are used for logging, driver objects, caching and thread pool, database connections.
+
+Definition: 
+
+The singleton pattern is a design pattern that restricts the instantiation of a class to one object. 
+
+An implementation of singleton class should have following properties:
+
+1. It should have only one instance : This is done by providing an instance of the class from within the class. 
+Outer classes or subclasses should be prevented to create the instance. This is done by making the constructor private
+in java so that no class can access the constructor and hence cannot instantiate it.
+2. Instance should be globally accessible : Instance of singleton class should be globally accessible so that each class
+can use it. In Java, it is done by making the access-specifier of instance public.

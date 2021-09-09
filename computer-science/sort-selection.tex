@@ -1,0 +1,101 @@
+\documentclass{article}
+\usepackage{minted}
+\author{Reinaldy Rafli}
+\date{\today}
+\title{Selection Sort Algorithm}
+\begin{document}
+
+\maketitle
+
+It works as follows:
+
+First find the smallest element in the array and exchange it with the element in the first position,
+then find the second smallest element and exchange it with the element in the second position,
+and continue in this way until the entire array is sorted.
+
+Its asymptotic complexity is O(n2) making it inefficient on large arrays.
+
+Its primary purpose is for when writing data is very expensive (slow) when compared to reading,
+eg. writing to flash memory or EEPROM.
+
+No other sorting algorithm has less data movement.
+
+\begin{minted}{c}
+  #include <stdio.h>
+ 
+  void selection_sort (int *a, int n) {
+      int i, j, m, t;
+      for (i = 0; i < n; i++) {
+          for (j = i, m = i; j < n; j++) {
+              if (a[j] < a[m]) {
+                  m = j;
+              }
+          }
+          t = a[i];
+          a[i] = a[m];
+          a[m] = t;
+      }
+  }
+    
+  int main () {
+      int a[] = {4, 65, 2, -31, 0, 99, 2, 83, 782, 1};
+      int n = sizeof a / sizeof a[0];
+      int i;
+      for (i = 0; i < n; i++)
+          printf("%d%s", a[i], i == n - 1 ? "\n" : " ");
+      selection_sort(a, n);
+      for (i = 0; i < n; i++)
+          printf("%d%s", a[i], i == n - 1 ? "\n" : " ");
+      return 0;
+  }
+
+\end{minted}
+ 
+\begin{minted}{go}
+  package main
+ 
+  import "fmt"
+  
+  var a = []int{170, 45, 75, -90, -802, 24, 2, 66}
+  
+  func main() {
+      fmt.Println("before:", a)
+      selectionSort(a)
+      fmt.Println("after: ", a)
+  }
+  
+  func selectionSort(a []int) {
+      last := len(a) - 1
+      for i := 0; i < last; i++ {
+          aMin := a[i]
+          iMin := i
+          for j := i + 1; j < len(a); j++ {
+              if a[j] < aMin {
+                  aMin = a[j]
+                  iMin = j
+              }
+          }
+          a[i], a[iMin] = aMin, a[i]
+      }
+  }
+\end{minted}
+
+\begin{minted}{js}
+  function selectionSort(nums) {
+    var len = nums.length;
+    for(var i = 0; i < len; i++) {
+      var minAt = i;
+      for(var j = i + 1; j < len; j++) {
+        if(nums[j] < nums[minAt])
+          minAt = j;
+      }
+  
+      if(minAt != i) {
+        var temp = nums[i];
+        nums[i] = nums[minAt];
+        nums[minAt] = temp;
+      }
+    }
+    return nums;
+  }
+\end{minted}

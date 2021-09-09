@@ -1,0 +1,91 @@
+\documentclass{article}
+\usepackage{minted}
+\author{Reinaldy Rafli}
+\date{\today}
+\title{Bubble Sort Algorithm}
+\begin{document}
+
+\maketitle
+
+The bubble sort works by passing sequentially over a list, comparing each value to the one immediately after it. 
+If the first value is greater than the second, their positions are switched. Over a number of passes, at most equal
+to the number of elements in the list, all of the values drift into their correct positions (large values "bubble"
+rapidly toward the end, pushing others down around them). Because each pass finds the maximum item and puts it
+at the end, the portion of the list to be sorted can be reduced at each pass. A boolean variable is used to track 
+whether any changes have been made in the current pass; when a pass completes without changing anything, the algorithm exits.
+
+Because of its abysmal O(n2) performance, it is not used often for large (or even medium-sized) datasets.
+
+\begin{minted}{}
+  repeat
+      if itemCount <= 1
+          return
+      hasChanged := false
+      decrement itemCount
+      repeat with index from 1 to itemCount
+          if (item at index) > (item at (index + 1))
+              swap (item at index) with (item at (index + 1))
+              hasChanged := true
+  until hasChanged = false
+\end{minted}
+
+\begin{minted}{c}
+  #include <stdio.h>
+ 
+  void bubble_sort (int *a, int n) {
+      int i, t, j = n, s = 1;
+      while (s) {
+          s = 0;
+          for (i = 1; i < j; i++) {
+              if (a[i] < a[i - 1]) {
+                  t = a[i];
+                  a[i] = a[i - 1];
+                  a[i - 1] = t;
+                  s = 1;
+              }
+          }
+          j--;
+      }
+  }
+    
+  int main () {
+      int a[] = {4, 65, 2, -31, 0, 99, 2, 83, 782, 1};
+      int n = sizeof a / sizeof a[0];
+      int i;
+      for (i = 0; i < n; i++)
+          printf("%d%s", a[i], i == n - 1 ? "\n" : " ");
+      bubble_sort(a, n);
+      for (i = 0; i < n; i++)
+          printf("%d%s", a[i], i == n - 1 ? "\n" : " ");
+      return 0;
+  } 
+\end{minted}
+
+\begin{minted}{go}
+  package main
+ 
+  import "fmt"
+  
+  func main() {
+      list := []int{31, 41, 59, 26, 53, 58, 97, 93, 23, 84}
+      fmt.Println("unsorted:", list)
+  
+      bubblesort(list)
+      fmt.Println("sorted!  ", list)
+  }
+  
+  func bubblesort(a []int) {
+      for itemCount := len(a) - 1; ; itemCount-- {
+          hasChanged := false
+          for index := 0; index < itemCount; index++ {
+              if a[index] > a[index+1] {
+                  a[index], a[index+1] = a[index+1], a[index]
+                  hasChanged = true
+              }
+          }
+          if hasChanged == false {
+              break
+          }
+      }
+  }
+\end{minted}

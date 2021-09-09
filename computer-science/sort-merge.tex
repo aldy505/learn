@@ -1,0 +1,176 @@
+\documentclass{article}
+\usepackage{minted}
+\author{Reinaldy Rafli}
+\date{\today}
+\title{Merge Sort Algorithm}
+\begin{document}
+
+\maketitle
+
+The merge sort is a recursive sort of order n*log(n).
+
+It is notable for having a worst case and average complexity of O(n*log(n)),
+and a best case complexity of O(n) (for pre-sorted input).
+
+The basic idea is to split the collection into smaller groups by halving it until the groups
+only have one element or no elements (which are both entirely sorted groups).
+
+Then merge the groups back together so that their elements are in order.
+
+The merge sort algorithm comes in two parts: sort function and merge function.
+
+\begin{minted}{}
+  function mergesort(m)
+   var list left, right, result
+   if length(m) ≤ 1
+       return m
+   else
+       var middle = length(m) / 2
+       for each x in m up to middle - 1
+           add x to left
+       for each x in m at and after middle
+           add x to right
+       left = mergesort(left)
+       right = mergesort(right)
+       if last(left) ≤ first(right) 
+          append right to left
+          return left
+       result = merge(left, right)
+       return result
+
+function merge(left,right)
+   var list result
+   while length(left) > 0 and length(right) > 0
+       if first(left) ≤ first(right)
+           append first(left) to result
+           left = rest(left)
+       else
+           append first(right) to result
+           right = rest(right)
+   if length(left) > 0 
+       append rest(left) to result
+   if length(right) > 0 
+       append rest(right) to result
+   return result
+\end{minted}
+
+\begin{minted}{c}
+  #include <stdio.h>
+#include <stdlib.h>
+ 
+void merge (int *a, int n, int m) {
+    int i, j, k;
+    int *x = malloc(n * sizeof (int));
+    for (i = 0, j = m, k = 0; k < n; k++) {
+        x[k] = j == n      ? a[i++]
+             : i == m      ? a[j++]
+             : a[j] < a[i] ? a[j++]
+             :               a[i++];
+    }
+    for (i = 0; i < n; i++) {
+        a[i] = x[i];
+    }
+    free(x);
+}
+ 
+void merge_sort (int *a, int n) {
+    if (n < 2)
+        return;
+    int m = n / 2;
+    merge_sort(a, m);
+    merge_sort(a + m, n - m);
+    merge(a, n, m);
+}
+ 
+int main () {
+    int a[] = {4, 65, 2, -31, 0, 99, 2, 83, 782, 1};
+    int n = sizeof a / sizeof a[0];
+    int i;
+    for (i = 0; i < n; i++)
+        printf("%d%s", a[i], i == n - 1 ? "\n" : " ");
+    merge_sort(a, n);
+    for (i = 0; i < n; i++)
+        printf("%d%s", a[i], i == n - 1 ? "\n" : " ");
+    return 0;
+}
+\end{minted}
+
+\begin{minted}{go}
+  package main
+  
+  import "fmt"
+  
+  var a = []int{170, 45, 75, -90, -802, 24, 2, 66}
+  var s = make([]int, len(a)/2+1) // scratch space for merge step
+  
+  func main() {
+      fmt.Println("before:", a)
+      mergeSort(a)
+      fmt.Println("after: ", a)
+  }
+  
+  func mergeSort(a []int) {
+      if len(a) < 2 {
+          return
+      }
+      mid := len(a) / 2
+      mergeSort(a[:mid])
+      mergeSort(a[mid:])
+      if a[mid-1] <= a[mid] {
+          return
+      }
+      // merge step, with the copy-half optimization
+      copy(s, a[:mid])
+      l, r := 0, mid
+      for i := 0; ; i++ {
+          if s[l] <= a[r] {
+              a[i] = s[l]
+              l++
+              if l == mid {
+                  break
+              }
+          } else {
+              a[i] = a[r]
+              r++
+              if r == len(a) {
+                  copy(a[i+1:], s[l:mid])
+                  break
+              }
+          }
+      }
+      return
+  }
+\end{minted}
+
+\begin{minted}{js}
+  function merge(left, right, arr) {
+    var a = 0;
+  
+    while (left.length && right.length) {
+      arr[a++] = (right[0] < left[0]) ? right.shift() : left.shift();
+    }
+    while (left.length) {
+      arr[a++] = left.shift();
+    }
+    while (right.length) {
+      arr[a++] = right.shift();
+    }
+  }
+    
+  function mergeSort(arr) {
+    var len = arr.length;
+  
+    if (len === 1) { return; }
+  
+    var mid = Math.floor(len / 2),
+        left = arr.slice(0, mid),
+        right = arr.slice(mid);
+  
+    mergeSort(left);
+    mergeSort(right);
+    merge(left, right, arr);
+  }
+  
+  var arr = [1, 5, 2, 7, 3, 9, 4, 6, 8];
+  mergeSort(arr); // arr will now: 1, 2, 3, 4, 5, 6, 7, 8, 9
+\end{minted}
