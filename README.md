@@ -14,14 +14,14 @@ Stuff's changing.
   <br>
   I began my journey on computer-related stuffs when I was like 12 or 13 years old. At that time, I originally was playing around with HTML, CSS, and some Wordpress.
   Later, I began interested on web development.
-  Then, I learn PHP where namespace isn't really familiar and object-oriented + MySQLi was still a thing.
+  Then, I learn PHP where namespace isn't really familiar and object-oriented + MySQLi wasn't a thing.
   
-  It got me down to a rabbit hole of knowing people who are like on their 20-30s (keep in mind, I was 12-13 back then),
+  It got me down to the rabbit hole of knowing people who are like on their 20-30s (keep in mind, I was 12-13 back then),
   knowing how is it to live a life on college,
   code some more. Even web frameworks wasn't a thing back then.
 
-  Here I am, in 2021, nearly 10 years apart from that point in time.
-  Stuff's changing so fast, I used to code in solely PHP & HTML with MySQL as a database.
+  Here I am, in 2021, nearly 10 years apart from that point of time.
+  Stuff's changing so fast, I used to code in solely PHP & HTML with MySQL as the database.
   Now there's more technology for web development.
   I don't even know you could use C for creating a back end.
 
@@ -30,7 +30,7 @@ Stuff's changing.
   Began interested on learning Node.js (keep in mind, on 2012, nobody likes Javascript, we all rely on JQuery for that part)
   and helped some open source project with it.
 
-  Now that I've learned Go, I began to went deeper to the rabbit hole of tech stuffs, programming languages, 
+  Now that I've learned Go, I began going deeper to the rabbit hole of tech stuffs, programming languages, 
   and the local (and worldwide) community.
 
   It's tiring, but it's a good fun.
